@@ -28,23 +28,26 @@ while True:
         print("You chose Option 1.")
         # Add code to execute Option 1 here
     elif choice == "2":
-        print("=======Quick Generate=======.")
+        print("\n=======Quick Generate=======")
         quantity = random.randint(0, MAX)
         result_quality = random.choices(quality,quality_rarity, k=quantity)
         result_material = random.choices(material,material_rarity, k=quantity)
         items = random.choices(tresure_dict["Items"], k=quantity)
-        print(items)
+        print("You found",quantity,"items!")
+        print("============================")
         random_items = []
         for i in range(quantity):
             random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
         for i in range(quantity):
             print(random_items[i])
-
+        print("============================")
+        print("Total value of items: "+str(sum(item.value for item  in random_items))+"g")
+        print("============================\n")
     elif choice == "3":
         print("You chose Option 3.")
         # Add code to execute Option 3 here
     elif choice == "4":
         print("Exiting the menu. Goodbye!")
-        break
+        break 
     else:
         print("Invalid choice. Please enter a number between 1 and 4.")
