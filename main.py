@@ -44,8 +44,31 @@ while True:
         print("Total value of items: "+str(sum(item.value for item  in random_items))+"g")
         print("============================\n")
     elif choice == "3":
-        print("You chose Option 3.")
-        # Add code to execute Option 3 here
+        print("\n=========Options==========")
+        print("Maximum items generated:",MAX)
+        print("=====Rarity of quality====")
+        for x, y in zip(quality, quality_rarity):
+            print(x+": {:.0%}".format(y))
+        print("====Rarity of material====")
+        for x, y in zip(material, material_rarity):
+            print(x+": {:.0%}".format(y))
+        print("============================\n")
+        option = input("What you want to modify? (Max, Quality, Material): ")
+        if option == "Max":
+            MAX = input("Enter new value for MAX: ")
+        elif option == "Quality" or option == "Q":
+            quality_choice = input("Enter a quality value (" + ", ".join(quality) + "): ")
+            quality_index = quality.index(quality_choice)
+            new_quality_rarity = input("Enter a new rarity value for " + quality_choice + ": ")
+            quality_rarity[quality_index] = float(new_quality_rarity)
+        elif option == "Material" or option == "M":
+            material_choice = input("Enter a material value (" + ", ".join(material) + "): ")
+            material_index = material.index(material_choice)
+            new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
+            material_rarity[material_index] = float(new_material_rarity)
+        else:
+            print("Invalid choice. Returning to menu ")
+        print("============================\n")   
     elif choice == "4":
         print("Exiting the menu. Goodbye!")
         break 
