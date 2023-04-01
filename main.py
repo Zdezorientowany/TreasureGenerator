@@ -55,17 +55,26 @@ while True:
         print("============================\n")
         option = input("What you want to modify? (Max, Quality, Material): ")
         if option == "Max":
-            MAX = input("Enter new value for MAX: ")
+            try:
+                MAX = int(input("Enter new value for MAX: "))
+            except ValueError:
+                print("Ivalid input. Please enter a valid integer")
         elif option == "Quality" or option == "Q":
-            quality_choice = input("Enter a quality value (" + ", ".join(quality) + "): ")
-            quality_index = quality.index(quality_choice)
-            new_quality_rarity = input("Enter a new rarity value for " + quality_choice + ": ")
-            quality_rarity[quality_index] = float(new_quality_rarity)
+            try:
+                quality_choice = input("Enter a quality value (" + ", ".join(quality) + "): ")
+                quality_index = quality.index(quality_choice)
+                new_quality_rarity = input("Enter a new rarity value for " + quality_choice + ": ")
+                quality_rarity[quality_index] = float(new_quality_rarity)
+            except ValueError:
+                print("Invalid input. Please enter value from 0 to 1")
         elif option == "Material" or option == "M":
-            material_choice = input("Enter a material value (" + ", ".join(material) + "): ")
-            material_index = material.index(material_choice)
-            new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
-            material_rarity[material_index] = float(new_material_rarity)
+            try:               
+                material_choice = input("Enter a material value (" + ", ".join(material) + "): ")
+                material_index = material.index(material_choice)
+                new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
+                material_rarity[material_index] = float(new_material_rarity)
+            except ValueError:
+                print("Invalid input. Please enter value from 0 to 1")            
         else:
             print("Invalid choice. Returning to menu ")
         print("============================\n")   
