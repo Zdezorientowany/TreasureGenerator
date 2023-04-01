@@ -15,7 +15,7 @@ quality_rarity = [0.7, 0.25, 0.05]
 material = ["Copper", "Silver", "Gold", "Jeweled"]
 material_rarity = [0.65, 0.2, 0.1, 0.05]
 
-print("Welcome to Tresure Generator!")
+print("Welcome to Treasure Generator!")
 print("1. Generate treasures")#Advanced Generator with promtps
 print("2. Quick Generete")#Generate random tresures by one click
 print("3. Options")#You can change crucial variables needed for quick Generate
@@ -53,8 +53,8 @@ while True:
         for x, y in zip(material, material_rarity):
             print(x+": {:.0%}".format(y))
         print("============================\n")
-        option = input("What you want to modify? (Max, Quality, Material): ")
-        if option == "Max":
+        option = input("What you want to modify? (Max(m), Quality(Q), Material(M),Exit(E)): ")
+        if option == "Max" or option == "m":
             try:
                 MAX = int(input("Enter new value for MAX: "))
             except ValueError:
@@ -74,12 +74,14 @@ while True:
                 new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
                 material_rarity[material_index] = float(new_material_rarity)
             except ValueError:
-                print("Invalid input. Please enter value from 0 to 1")            
+                print("Invalid input. Please enter value from 0 to 1")      
+        elif option == "Exit" or option == "E":
+            print("Returning to menu...")  
         else:
             print("Invalid choice. Returning to menu ")
         print("============================\n")   
     elif choice == "4":
-        print("Exiting the menu. Goodbye!")
+        print("Exiting...")
         break 
     else:
         print("Invalid choice. Please enter a number between 1 and 4.")
