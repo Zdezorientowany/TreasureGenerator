@@ -3,42 +3,42 @@
         {
            "name": "Ring",
            "value": 10,
-           "size": "small"
+           "size": "Small"
         },
         {
             "name": "Necklace",
             "value": 20,
-            "size": "small"
+            "size": "Small"
         },
         {
             "name": "Vase",
             "value": 6,
-            "size": "medium"
+            "size": "Medium"
         },
         {
             "name": "Candlestick",
             "value": 4,
-            "size": "medium"
+            "size": "Medium"
         },
         {
             "name": "Bowl",
             "value": 8,
-            "size": "big"
+            "size": "Large"
         },
         {
             "name": "Eering",
             "value": 14,
-            "size": "small"
+            "size": "Small"
         },
         {
             "name": "Bracelet",
             "value": 12,
-            "size": "small"
+            "size": "Small"
         },
         {
-            "name": "Old coin",
+            "name": "Old Coin",
             "value": 2,
-            "size": "small"
+            "size": "Small"
         }
     ]
   }
