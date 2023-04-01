@@ -32,7 +32,13 @@ while True:
         quantity = random.randint(0, MAX)
         result_quality = random.choices(quality,quality_rarity, k=quantity)
         result_material = random.choices(material,material_rarity, k=quantity)
-        print(result_quality,result_material)
+        items = random.choices(tresure_dict["Items"], k=quantity)
+        print(items)
+        random_items = []
+        for i in range(quantity):
+            random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
+        for i in range(quantity):
+            print(random_items[i])
 
     elif choice == "3":
         print("You chose Option 3.")
