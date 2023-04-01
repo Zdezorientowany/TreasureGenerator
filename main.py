@@ -22,12 +22,13 @@ print("3. Options")#You can change crucial variables needed for quick Generate
 print("4. Exit")
 
 while True:
-    choice = input("Enter your choice (1-4): ")
+    choice = input("What do you want sugar?: ")
 
-    if choice == "1":
+    if choice == "1" or choice == "G" or choice == "Generate":
         print("You chose Option 1.")
         # Add code to execute Option 1 here
-    elif choice == "2":
+
+    elif choice == "2" or choice == "Q" or choice =="Quick" or choice == "Quick Generate":
         print("\n=======Quick Generate=======")
         quantity = random.randint(0, MAX)
         result_quality = random.choices(quality,quality_rarity, k=quantity)
@@ -43,7 +44,8 @@ while True:
         print("============================")
         print("Total value of items: "+str(sum(item.value for item  in random_items))+"g")
         print("============================\n")
-    elif choice == "3":
+
+    elif choice == "3" or choice =="O" or choice == "Options":
         print("\n=========Options==========")
         print("Maximum items generated:",MAX)
         print("=====Rarity of quality====")
@@ -80,7 +82,8 @@ while True:
         else:
             print("Invalid choice. Returning to menu ")
         print("============================\n")   
-    elif choice == "4":
+
+    elif choice == "4" or choice =="E" or choice == "Exit":
         print("Exiting...")
         break 
     else:
