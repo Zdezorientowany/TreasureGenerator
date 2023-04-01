@@ -1,5 +1,12 @@
 from Treasure import Treasure
 import random
+import json
+
+with open('treasures.json') as f:
+    tresure_dict = json.load(f)
+    
+print(tresure_dict)
+
 
 MAX = 5
 quality = ["Broken", "Good Quality", "Flawless"]
