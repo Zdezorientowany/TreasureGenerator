@@ -1,4 +1,4 @@
-from Tresure import Tresure
+from Treasure import Treasure
 import random
 
 MAX = 5
