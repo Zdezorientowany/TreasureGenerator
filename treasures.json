@@ -1,0 +1,19 @@
+{
+    "Items":[
+        {
+           "name": "Ring",
+           "value": 10,
+           "size": "small"
+        },
+        {
+            "name": "Necklace",
+            "value": 20,
+            "size": "small"
+        },
+        {
+            "name": "Vase",
+            "value": 6,
+            "size": "medium"
+        }
+    ]
+  }
