@@ -13,24 +13,24 @@ class Treasure:
         # Format the quality and material
         quality_str = ""
         if self.quality == "Flawless":
-            quality_str = Fore.MAGENTA + self.quality + Style.RESET_ALL
+            quality_str = format_text(self.quality,"flawless")
         elif self.quality == "Good Quality":
-            quality_str = Fore.YELLOW + self.quality + Style.RESET_ALL
+            quality_str = format_text(self.quality,"good")
         else:
-            quality_str = Fore.RED + self.quality + Style.RESET_ALL
+            quality_str = format_text(self.quality,"broken")
         
         material_str = ""
         if self.material == "Jeweled":
-            material_str = Fore.RED + self.material + Style.RESET_ALL
+            material_str = format_text(self.material,"jeweled")
         elif self.material == "Gold":
-            material_str = Fore.YELLOW + self.material + Style.RESET_ALL
+            material_str = format_text(self.material,"gold")
         elif self.material == "Silver":
-            material_str = Fore.CYAN + self.material + Style.RESET_ALL
+            material_str = format_text(self.material,"silver")
         else:
-            material_str = Fore.WHITE + self.material + Style.RESET_ALL
+            material_str = format_text(self.material,"copper")
         
         # Format the value
-        value_str = Fore.YELLOW + str(self.value) + "g" + Style.RESET_ALL
+        value_str = format_text(str(self.value) + "g","gold")
         
         # Format the size
         size_str = self.size.capitalize()
