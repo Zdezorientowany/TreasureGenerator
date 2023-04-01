@@ -1,4 +1,5 @@
 from colorama import Fore, Style
+from utils import format_text
 class Treasure:
     
     def __init__(self, _name, _value, _size, _material, _quality):

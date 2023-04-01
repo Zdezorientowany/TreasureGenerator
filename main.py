@@ -3,6 +3,7 @@ import random
 import json
 import os
 import colorama
+from utils import format_text
 
 with open('treasures.json') as f:
     tresure_dict = json.load(f)
