@@ -45,9 +45,8 @@ while True:
             random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
         for i in range(quantity):
             print(random_items[i])
-        print("============================")
+        print("-" * 75)
         print("\033[92m{:<67} {:<8}\033[0m".format('Total value of items:', str(sum(item.value for item in random_items)) + 'g'))
-        print("============================\n")
 
     elif choice == "3" or choice =="O" or choice == "Options":
         print("\033[93m=======Options=======\033[0m")
