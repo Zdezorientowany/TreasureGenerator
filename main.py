@@ -4,6 +4,7 @@ import json
 import os
 import colorama
 from utils import format_text
+from tabulate import tabulate
 
 with open('treasures.json') as f:
     tresure_dict = json.load(f)
@@ -11,7 +12,7 @@ with open('treasures.json') as f:
 print(tresure_dict)
 
 
-MAX = 5
+MAX = 10
 quality = ["Broken", "Good Quality", "Flawless"]
 quality_rarity = [0.7, 0.25, 0.05]
 
@@ -44,8 +45,9 @@ while True:
         random_items = []
         for i in range(quantity):
             random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-        for i in range(quantity):
-            print(random_items[i])
+        print(tabulate([i.to_dict() for i in random_items], headers=[]))
+        # for i in range(quantity):
+            # print(random_items[i])
         print("-" * 75)
         print("\033[92m{:<67} {:<8}\033[0m".format('Total value of items:', str(sum(item.value for item in random_items)) + 'g'))
 
