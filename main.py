@@ -20,13 +20,15 @@ material_rarity = [0.65, 0.2, 0.1, 0.05]
 
 os.system("cls || clear")
 while True:
-    
-    print("\n\033[93mWelcome to Treasure Generator!\033[0m")
-    print("1. Generate treasures")#Advanced Generator with promtps
-    print("2. Quick Generete")#Generate random tresures by one click
-    print("3. Options")#You can change crucial variables needed for quick Generate
-    print("4. Exit")
-    choice = input("What do you want sugar?: ")
+    print(format_text("\n"+"="*75,"main"))  
+    print(format_text("-"*28,"dark"),format_text("Treasure Generator","light"),format_text("-"*27,"dark"))
+    print("1. ",format_text("Advanced Generate","light"))#Advanced Generator with promtps
+    print("2. ",format_text("Quick Generate","light"))#Generate random tresures by one click
+    print("3. ",format_text("Options","light"))#You can change crucial variables needed for quick Generate
+    print("4. ",format_text("Exit","light"))
+    print(format_text("-"*75,"dark")) 
+    print(format_text("="*75,"main"))  
+    choice = input("Enter your choice: ")
     os.system("cls || clear")
     if choice == "1" or choice == "G" or choice == "Generate":
         print("\033[93m=======Generate treasures=======\033[0m")
@@ -47,24 +49,27 @@ while True:
         # for i in range(quantity):
             # print(random_items[i])
         print("-" * 75)
-        print("\033[92m{:<67} {:<8}\033[0m".format('Total value of items:', str(sum(item.value for item in random_items)) + 'g'))
-
+        print('Total value of items:', str(sum(item.value for item in random_items)) + 'g')
+        input()
+        os.system("cls || clear")
     elif choice == "3" or choice =="O" or choice == "Options":
-        print("\033[93m=======Options=======\033[0m")
-        print("Maximum items generated:",MAX)
-        print("=====Rarity of quality====")
+        print(format_text("="*33,"dark"),format_text("Options","light"),format_text("="*33,"dark"))
+        print("Maximum items generated:",format_text(str(MAX),"light"))
+        print("\n"+format_text("="*28,"dark"),format_text("Rarity of quality","light"),format_text("="*28,"dark"))
         for x, y in zip(quality, quality_rarity):
-            print(x+": {:.0%}".format(y))
-        print("====Rarity of material====")
+            print(x+format_text(": {:.0%}".format(y),"light"))
+        print("\n"+format_text("="*28,"dark"),format_text("Rarity of material","light"),format_text("="*27,"dark"))    
         for x, y in zip(material, material_rarity):
-            print(x+": {:.0%}".format(y))
-        print("============================\n")
-        option = input("What you want to modify? (Max(m), Quality(Q), Material(M),Exit(E)): ")
+            print(x+format_text(": {:.0%}".format(y),"light"))
+        print(format_text("\n"+"="*75,"dark")) 
+        print(format_text("(Max(m), Quality(Q), Material(M),Exit(E))","main"))
+        option = input(format_text("What you want to modify?: ","light"))
         if option == "Max" or option == "m":
             try:
                 MAX = int(input("Enter new value for MAX: "))
             except ValueError:
-                print("Ivalid input. Please enter a valid integer")
+                os.system("cls || clear")
+                print(format_text("Invalid choice. Returning to menu ","false"))
         elif option == "Quality" or option == "Q":
             try:
                 quality_choice = input("Enter a quality value (" + ", ".join(quality) + "): ")
@@ -72,7 +77,8 @@ while True:
                 new_quality_rarity = input("Enter a new rarity value for " + quality_choice + ": ")
                 quality_rarity[quality_index] = float(new_quality_rarity)
             except ValueError:
-                print("Invalid input. Please enter value from 0 to 1")
+                os.system("cls || clear")
+                print(format_text("Invalid choice. Returning to menu ","false"))
         elif option == "Material" or option == "M":
             try:               
                 material_choice = input("Enter a material value (" + ", ".join(material) + "): ")
@@ -80,15 +86,16 @@ while True:
                 new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
                 material_rarity[material_index] = float(new_material_rarity)
             except ValueError:
-                print("Invalid input. Please enter value from 0 to 1")      
+                os.system("cls || clear")
+                print(format_text("Invalid input. Returning to menu ","false"))    
         elif option == "Exit" or option == "E":
             print("Returning to menu...")  
         else:
-            print("Invalid choice. Returning to menu ")
-        print("============================\n")   
-
+            os.system("cls || clear")
+            print(format_text("Invalid choice. Returning to menu ","false"))
+        os.system("cls || clear")
     elif choice == "4" or choice =="E" or choice == "Exit":
-        print("\033[93mExiting...\033[0m")
+        print(format_text("Exiting...","light")) 
         break 
     else:
-        print("\033[91mInvalid choice. Please enter a number between 1 and 4.\033[0m")
+        print(format_text("Invalid choice. Please enter a number between 1 and 4.","false")) 

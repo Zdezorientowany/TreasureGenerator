@@ -4,11 +4,14 @@ colors = {
     "silver": (192, 192, 192),
     "gold": (255, 189, 27),
     "broken": (128, 128, 128),
-    "good quality": (255, 255, 0),
+    "good quality": (100,200,150),
     "flawless": (255, 165, 0),
     "jeweled": (160, 32, 240),
-    "main": (0, 59, 79),
-    "value": (255, 190, 120)
+    "dark": (54, 79, 89),
+    "main": (90,146,148),
+    "light": (181,230,211),
+    "value": (255, 190, 120),
+    "false": (200,0,0)
 }
 
 def format_text(text, color):
