@@ -67,6 +67,7 @@ while True:
         option = input(format_text("What you want to modify?: ","light"))
         if option == "Max" or option == "m":
             try:
+                MAX = int(input(f"Enter new value for MAX({MAX}): "))
                 settings_dict["MAX"] = MAX
                 with open('settings.json', 'w') as f:
                     json.dump(settings_dict, f, indent=4)
@@ -75,9 +76,9 @@ while True:
                 print(format_text("Invalid choice. Returning to menu ","false"))
         elif option == "Quality" or option == "Q":
             try:
-                quality_choice = input("Enter a quality value (" + ", ".join(quality) + "): ")
+                quality_choice = input(f"Enter a quality value ({', '.join([f'{q} ({r})' for q, r in zip(quality, quality_rarity)])}): ")
                 quality_index = quality.index(quality_choice)
-                new_quality_rarity = input("Enter a new rarity value for " + quality_choice + ": ")
+                new_quality_rarity = input(f"Enter a new rarity value for {quality_choice} ({quality_rarity[quality_index]}):")
                 quality_rarity[quality_index] = float(new_quality_rarity)
                 settings_dict["quality"][quality_choice] = quality_rarity[quality_index]
                 with open('settings.json', 'w') as f:
@@ -87,9 +88,9 @@ while True:
                 print(format_text("Invalid choice. Returning to menu ","false"))
         elif option == "Material" or option == "M":
             try:               
-                material_choice = input("Enter a material value (" + ", ".join(material) + "): ")
+                material_choice = input(f"Enter a material value ({', '.join([f'{m} ({r})' for m, r in zip(material, material_rarity)])}): ")
                 material_index = material.index(material_choice)
-                new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
+                new_material_rarity = input(f"Enter a new rarity value for {material_choice} ({material_rarity[material_index]}):")
                 material_rarity[material_index] = float(new_material_rarity)
                 settings_dict["material"][material_choice] = material_rarity[material_index]
                 with open('settings.json', 'w') as f:
