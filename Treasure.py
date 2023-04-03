@@ -6,12 +6,13 @@ class Treasure:
         self.size = _size
         self.material = _material
         self.quality = _quality
-        self.value = int(_value * (2 if self.quality == "Flawless" else 1 if self.quality == "Good Quality" else 0.5) * (4 if self.material == "Jeweled" else 3 if self.material == "Gold" else 2 if self.material == "Silver" else 1))
+        self.value = int(_value * (0.25 if self.quality == "broken" else 0.5 if self.quality == "rusty" else 1 if self.quality == "polished" else 1.5 if self.quality == "flawless" else 2) * (4 if self.material == "Jeweled" else 3 if self.material == "Gold" else 2 if self.material == "Silver" else 1))
     
     def to_dict(self):
-        quality_str = format_text(self.quality, self.quality.lower())
-        material_str = format_text(self.material, self.material.lower())
+        quality_str = format_text(self.quality, self.quality.lower(),self.material.lower())
+        material_str = format_text(self.material, self.quality.lower(),self.material.lower())
+        name_str = format_text(self.name, self.quality.lower(),self.material.lower())
         value_str = format_text(str(self.value)+"g", "value")
-        first_column = str(quality_str + " " + material_str + " " + self.name)
+        first_column = str(quality_str + " " + material_str + " " + name_str)
         second_column = str(value_str + " - " + self.size)
         return {"First": first_column, "Second": second_column}
