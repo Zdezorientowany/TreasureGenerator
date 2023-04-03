@@ -1,4 +1,3 @@
-from colorama import Fore, Style
 from utils import format_text
 class Treasure:
     

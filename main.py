@@ -2,7 +2,6 @@ from Treasure import Treasure
 import random
 import json
 import os
-import colorama
 from utils import format_text
 from tabulate import tabulate
 
@@ -19,7 +18,6 @@ quality_rarity = [0.7, 0.25, 0.05]
 material = ["Copper", "Silver", "Gold", "Jeweled"]
 material_rarity = [0.65, 0.2, 0.1, 0.05]
 
-colorama.init()
 os.system("cls || clear")
 while True:
     
