@@ -8,15 +8,16 @@ from tabulate import tabulate
 with open('treasures.json') as f:
     tresure_dict = json.load(f)
     
-print(tresure_dict)
+with open('settings.json') as f:
+    settings_dict = json.load(f)
 
+MAX = settings_dict["MAX"]
 
-MAX = 10
-quality = ["Broken", "Good Quality", "Flawless"]
-quality_rarity = [0.7, 0.25, 0.05]
+quality = list(settings_dict["quality"].keys())
+quality_rarity = list(settings_dict["quality"].values())
 
-material = ["Copper", "Silver", "Gold", "Jeweled"]
-material_rarity = [0.65, 0.2, 0.1, 0.05]
+material = list(settings_dict["material"].keys())
+material_rarity = list(settings_dict["material"].values())
 
 os.system("cls || clear")
 while True:
@@ -66,7 +67,9 @@ while True:
         option = input(format_text("What you want to modify?: ","light"))
         if option == "Max" or option == "m":
             try:
-                MAX = int(input("Enter new value for MAX: "))
+                settings_dict["MAX"] = MAX
+                with open('settings.json', 'w') as f:
+                    json.dump(settings_dict, f, indent=4)
             except ValueError:
                 os.system("cls || clear")
                 print(format_text("Invalid choice. Returning to menu ","false"))
@@ -76,6 +79,9 @@ while True:
                 quality_index = quality.index(quality_choice)
                 new_quality_rarity = input("Enter a new rarity value for " + quality_choice + ": ")
                 quality_rarity[quality_index] = float(new_quality_rarity)
+                settings_dict["quality"][quality_choice] = quality_rarity[quality_index]
+                with open('settings.json', 'w') as f:
+                    json.dump(settings_dict, f, indent=4)
             except ValueError:
                 os.system("cls || clear")
                 print(format_text("Invalid choice. Returning to menu ","false"))
@@ -85,6 +91,9 @@ while True:
                 material_index = material.index(material_choice)
                 new_material_rarity = input("Enter a new rarity value for " + material_choice + ": ")
                 material_rarity[material_index] = float(new_material_rarity)
+                settings_dict["material"][material_choice] = material_rarity[material_index]
+                with open('settings.json', 'w') as f:
+                    json.dump(settings_dict, f, indent=4)
             except ValueError:
                 os.system("cls || clear")
                 print(format_text("Invalid input. Returning to menu ","false"))    

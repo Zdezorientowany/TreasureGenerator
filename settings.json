@@ -1,0 +1,14 @@
+{
+    "quality": {
+        "Broken": 0.7,
+        "Good Quality": 0.25,
+        "Flawless": 0.05
+    },
+    "material": {
+        "Copper": 0.65,
+        "Silver": 0.2,
+        "Gold": 0.1,
+        "Jeweled": 0.05
+    },
+    "MAX": 5
+}
