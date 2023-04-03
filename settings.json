@@ -1,16 +1,16 @@
 {
     "quality": {
-        "Broken": 0.50,
-        "Rusted": 0.40,
-        "Polished": 0.10,
+        "Broken": 0.5,
+        "Rusted": 0.4,
+        "Polished": 0.1,
         "Flawless": 0.05,
         "Enchanted": 0.01
     },
     "material": {
-        "Copper": 0.90,
+        "Copper": 0.9,
         "Silver": 0.1,
         "Gold": 0.05,
         "Jeweled": 0.01
     },
-    "MAX": 20
+    "MAX": 5
 }
