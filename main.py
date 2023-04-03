@@ -16,6 +16,7 @@ MAX = settings_dict["MAX"]
 quality = list(settings_dict["quality"].keys())
 quality_rarity = list(settings_dict["quality"].values())
 
+
 material = list(settings_dict["material"].keys())
 material_rarity = list(settings_dict["material"].values())
 
@@ -31,28 +32,31 @@ while True:
     print(format_text("="*75,"main"))  
     choice = input("Enter your choice: ")
     os.system("cls || clear")
+
     if choice == "1" or choice == "G" or choice == "Generate":
         print("\033[93m=======Generate treasures=======\033[0m")
         # Add code to execute Option 1 here
+
     elif choice == "2" or choice == "Q" or choice =="Quick" or choice == "Quick Generate":
-        print("\033[93m=======Quick Generate=======\033[0m")
+        print(format_text("="*30,"dark"),format_text("Quick Generate","light"),format_text("="*29,"dark"))
 
         quantity = random.randint(0, MAX)
         result_quality = random.choices(quality,quality_rarity, k=quantity)
         result_material = random.choices(material,material_rarity, k=quantity)
         items = random.choices(tresure_dict["Items"], k=quantity)
-        print("\nYou found",quantity,"items!\n")
-        print("-" * 75)
+        print(format_text("\nYou found "+str(quantity)+" items!","main"))
+        print(format_text("\n"+"="*75,"dark")) 
         random_items = []
         for i in range(quantity):
             random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
         print(tabulate([i.to_dict() for i in random_items], headers=[]))
         # for i in range(quantity):
             # print(random_items[i])
-        print("-" * 75)
-        print('Total value of items:', str(sum(item.value for item in random_items)) + 'g')
+        print(format_text("="*75,"dark")) 
+        print('Total value of items:'+" "*48+ format_text(str(sum(item.value for item in random_items)) + 'g',"light"))
         input()
         os.system("cls || clear")
+
     elif choice == "3" or choice =="O" or choice == "Options":
         print(format_text("="*33,"dark"),format_text("Options","light"),format_text("="*33,"dark"))
         print("Maximum items generated:",format_text(str(MAX),"light"))
@@ -65,6 +69,7 @@ while True:
         print(format_text("\n"+"="*75,"dark")) 
         print(format_text("(Max(m), Quality(Q), Material(M),Exit(E))","main"))
         option = input(format_text("What you want to modify?: ","light"))
+
         if option == "Max" or option == "m":
             try:
                 MAX = int(input(f"Enter new value for MAX({MAX}): "))
@@ -104,6 +109,7 @@ while True:
             os.system("cls || clear")
             print(format_text("Invalid choice. Returning to menu ","false"))
         os.system("cls || clear")
+
     elif choice == "4" or choice =="E" or choice == "Exit":
         print(format_text("Exiting...","light")) 
         break 
