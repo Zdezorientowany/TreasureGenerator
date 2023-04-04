@@ -115,6 +115,8 @@ while True:
         print(format_text("-"*30,"dark"),format_text("Quick Generate","light"),format_text("-"*29,"dark"))
 
         quantity = random.randint(0, MAX)
+        print(quality)
+        print(quality_rarity)
         result_quality = random.choices(quality,quality_rarity, k=quantity)
         result_material = random.choices(material,material_rarity, k=quantity)
         items = random.choices(tresure_dict["Items"], k=quantity)
