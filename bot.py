@@ -2,29 +2,39 @@ import discord
 import asyncio
 from main import generate_treasures
 
-intents = discord.Intents(messages=True)
+intents = discord.Intents.default()
 client = discord.Client(intents=intents)
+
+async def my_background_task():
+    print("Working")
+    await client.wait_until_ready()
+    counter = 0
+    channel = client.get_channel(1092570289843490897) # replace with channel_id
+    print(channel)
+    while not client.is_closed():
+        counter += 1
+        await channel.send(counter)
+        await asyncio.sleep(60) # task runs every 60 seconds
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
+    channel = client.get_channel(1092570289843490897)
+    await channel.send(f"""{generate_treasures()}""")
 
-async def start_bot():
-    try:
-        await client.start('MTA5MjU2NTQ5NTQ2ODgwMjEzOQ.GwbmqM.1OvJtA_p8wPntVjVbaKW6iMLMX7cpxgLASfVZU')
-    except Exception as e:
-        print("Failed to start bot: ", e)
-
-@client.event
-async def send_treasures():
+async def main():
+    await client.start('MTA5MjU2NTQ5NTQ2ODgwMjEzOQ.GqKIUK.dgPvt--rsqGpK-mPtuNmXZccVWdYXv2znI_h4A')
     await client.wait_until_ready()
-    channel = client.get_channel(int(1092570289843490897))
-    while not client.is_closed():
-        if client.is_ready():
-            await channel.send(generate_treasures())
-        await asyncio.sleep(60)  # send message every 60 seconds
+    # client.loop.create_task(my_background_task())
+    client.loop.run_forever()
 
-if __name__ == "__main__":
-    asyncio.get_event_loop().create_task(start_bot())
-    asyncio.get_event_loop().create_task(send_treasures())
-    asyncio.get_event_loop().run_forever()
+asyncio.run(main())
+
+
+
+
+
+#MTA5MjU2NTQ5NTQ2ODgwMjEzOQ.GqKIUK.dgPvt--rsqGpK-mPtuNmXZccVWdYXv2znI_h4A

@@ -27,10 +27,10 @@ def generate_treasures():
     result_material = random.choices(material,material_rarity, k=quantity)
     items = random.choices(tresure_dict["Items"], k=quantity)
     random_items = []
+    print("test")
     for i in range(quantity):
         random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-    return tabulate([i.to_dict() for i in random_items], headers=[])
-
+    return tabulate([i.to_dict_no_color() for i in random_items], headers=[])
 
 if __name__ == "__main__":
     os.system("cls || clear")
