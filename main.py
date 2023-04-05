@@ -4,6 +4,7 @@ import json
 import os
 from utils import format_text
 from tabulate import tabulate
+import subprocess
 
 with open('treasures.json') as f:
     tresure_dict = json.load(f)
@@ -21,16 +22,15 @@ material = list(settings_dict["material"].keys())
 material_rarity = list(settings_dict["material"].values())
 
 
-def generate_treasures():
+def generate_treasures_for_discord():
     quantity = random.randint(0, MAX)
     result_quality = random.choices(quality,quality_rarity, k=quantity)
     result_material = random.choices(material,material_rarity, k=quantity)
     items = random.choices(tresure_dict["Items"], k=quantity)
     random_items = []
-    print("test")
     for i in range(quantity):
         random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-    return tabulate([i.to_dict_no_color() for i in random_items], headers=[])
+    return tabulate([i.to_dict_for_discord() for i in random_items], headers=[])
 
 if __name__ == "__main__":
     os.system("cls || clear")
@@ -68,12 +68,8 @@ if __name__ == "__main__":
             input()
             os.system("cls || clear")
             
-            
-            
         elif choice == "3" or choice == "D" or choice =="Discord" or choice == "Quick Generate to DISCORD":
-            pass
-            
-            
+            result = subprocess.run(['python', 'bot.py'])
 
         elif choice == "4" or choice =="O" or choice == "Options":
             print(format_text("="*33,"dark"),format_text("Options","light"),format_text("="*33,"dark"))

@@ -17,7 +17,7 @@ class Treasure:
         second_column = str(value_str + " - " + self.size)
         return {"First": first_column, "Second": second_column}
     
-    def to_dict_no_color(self):
-        first_column = str(self.quality + " " + self.material + " " + self.name)
-        second_column = str(str(self.value) + "g" + " - " + self.size)
+    def to_dict_for_discord(self):
+        first_column = str(self.quality+" "+self.material+" "+self.name)
+        second_column = str(str(self.value)+"g"+" - "+self.size)
         return {"First": first_column, "Second": second_column}
