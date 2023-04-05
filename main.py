@@ -32,11 +32,12 @@ while True:
     print("2. ",format_text("Quick Generate","light"))#Generate random treasures by one click
     print("3. ",format_text("Preset Generate","light"))#Generate treasures from preconfigured settings
     print("4. ",format_text("Options","light"))#You can change crucial variables needed for quick Generate
-    print("5. ",format_text("Exit","light"))
+    print("5. ",format_text("Exit","light"))#Close program
     print(format_text("-"*75,"dark")) 
     print(format_text("="*75,"main"))  
     choice = input("Enter your choice: ")
     os.system("cls || clear")
+    choice = choice.lower()
 
     if choice in ("1", "G", "Generate", "Advanced", "A", "Advanced Generate"):
         flag = True
@@ -149,7 +150,13 @@ while True:
             choice = input("Which preset you want to use?: ")
             os.system("cls || clear")
             print(format_text("\n"+"="*75,"main")) 
-            print(format_text("-"*30,"dark"),format_text(str(choice)+" Preset","light"),format_text("-"*29,"dark"))
+            temp = (73-len(str(choice)))/2
+            if temp%2 > 0:
+                temp = int(temp)+1
+                print(format_text("-"*temp,"dark"),format_text(str(choice),"light"),format_text("-"*(temp-1),"dark"))
+            else:
+                temp = int(temp)
+                print(format_text("-"*temp,"dark"),format_text(str(choice),"light"),format_text("-"*(temp),"dark"))
             chosen_preset = presets_dict[str(choice)]
             quantity = random.randint(chosen_preset["MIN"], chosen_preset["MAX"])
             while True: 
@@ -187,7 +194,7 @@ while True:
                     print(format_text("Invalid choice. ","false"))
                     continue
 
-    elif choice in ("4", "O", "Options", "o", "options"):
+    elif choice in ("4", "O", "Options"):
         flag = True
         while flag:
             os.system("cls || clear")
@@ -211,7 +218,7 @@ while True:
             option = input(format_text("What do you want to modify?: ","light"))
             if option in("Min", "1"):
                 try:
-                    MIN = int(input(f"Enter new value for MIN({MIN}): "))
+                    MIN = int(input(f"Enter new value for MIN: "))
                     settings_dict["MIN"] = MIN
                     with open('settings.json', 'w') as f:
                         json.dump(settings_dict, f, indent=4)
@@ -222,7 +229,7 @@ while True:
                 continue
             elif option in("Max", "2"):
                 try:
-                    MAX = int(input(f"Enter new value for MAX({MAX}): "))
+                    MAX = int(input(f"Enter new value for MAX: "))
                     settings_dict["MAX"] = MAX
                     with open('settings.json', 'w') as f:
                         json.dump(settings_dict, f, indent=4)
@@ -358,7 +365,7 @@ while True:
                 print(format_text("Invalid choice. Returning to menu ","false"))
                 break
 
-    elif choice in ("5", "E", "Exit", "e", "exit"):
+    elif choice in ("5", "E", "Exit"):
         print(format_text("Exiting...","light")) 
         break 
     else:

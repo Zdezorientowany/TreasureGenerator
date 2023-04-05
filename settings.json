@@ -7,11 +7,11 @@
         "Enchanted": 0.01
     },
     "material": {
-        "Copper": 0.9,
+        "Copper": 0.8,
         "Silver": 0.1,
         "Gold": 0.05,
         "Jeweled": 0.01
     },
-    "MIN": 0,
+    "MIN": 1,
     "MAX": 10
 }
