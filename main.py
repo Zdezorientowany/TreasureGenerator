@@ -30,7 +30,14 @@ def generate_treasures_for_discord():
     random_items = []
     for i in range(quantity):
         random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-    return tabulate([i.to_dict_for_discord() for i in random_items], headers=[])
+    table = tabulate([i.to_dict_for_discord() for i in random_items], headers=[])
+    
+    return str("="*22 + "TREASURE!" + "="*21 + "\n\n" 
+               + "You found "+str(quantity)+" items!" + "\n\n" 
+               + "="*52 + "\n" 
+               + table + "\n" 
+               + "="*52 + "\n" 
+               + "Total value of items:" + " "*28 + str(sum(item.value for item in random_items)) + 'g')
 
 if __name__ == "__main__":
     os.system("cls || clear")
@@ -70,6 +77,7 @@ if __name__ == "__main__":
             
         elif choice == "3" or choice == "D" or choice =="Discord" or choice == "Quick Generate to DISCORD":
             result = subprocess.run(['python', 'bot.py'])
+            os.system("cls || clear")
 
         elif choice == "4" or choice =="O" or choice == "Options":
             print(format_text("="*33,"dark"),format_text("Options","light"),format_text("="*33,"dark"))
