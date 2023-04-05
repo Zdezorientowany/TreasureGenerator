@@ -1,0 +1,36 @@
+{
+    "Deafault": {
+        "quality": {
+            "Broken": 0.5,
+            "Rusted": 0.4,
+            "Polished": 0.1,
+            "Flawless": 0.05,
+            "Enchanted": 0.01
+        },
+        "material": {
+            "Copper": 0.9,
+            "Silver": 0.1,
+            "Gold": 0.05,
+            "Jeweled": 0.01
+        },
+        "MIN": 0,
+        "MAX": 5
+    },
+    "Boss": {
+        "quality": {
+            "Broken": 0.5,
+            "Rusted": 0.4,
+            "Polished": 0.1,
+            "Flawless": 0.05,
+            "Enchanted": 0.01
+        },
+        "material": {
+            "Copper": 0.9,
+            "Silver": 0.1,
+            "Gold": 0.05,
+            "Jeweled": 0.01
+        },
+        "MIN": 0,
+        "MAX": 5
+    }
+}
