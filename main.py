@@ -22,7 +22,7 @@ material = list(settings_dict["material"].keys())
 material_rarity = list(settings_dict["material"].values())
 
 
-def generate_treasures_for_discord():
+def generate_treasures(colors=True):
     quantity = random.randint(0, MAX)
     result_quality = random.choices(quality,quality_rarity, k=quantity)
     result_material = random.choices(material,material_rarity, k=quantity)
@@ -30,7 +30,10 @@ def generate_treasures_for_discord():
     random_items = []
     for i in range(quantity):
         random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-    table = tabulate([i.to_dict_for_discord() for i in random_items], headers=[])
+    if colors:
+        table = tabulate([i.to_dict() for i in random_items], headers=[])
+    else:
+        table = tabulate([i.to_dict_for_discord() for i in random_items], headers=[])
     
     return str("="*22 + "TREASURE!" + "="*21 + "\n\n" 
                + "You found "+str(quantity)+" items!" + "\n\n" 
@@ -59,19 +62,7 @@ if __name__ == "__main__":
             # Add code to execute Option 1 here
 
         elif choice == "2" or choice == "Q" or choice =="Quick" or choice == "Quick Generate":
-            print(format_text("="*30,"dark"),format_text("Quick Generate","light"),format_text("="*29,"dark"))
-            quantity = random.randint(0, MAX)
-            result_quality = random.choices(quality,quality_rarity, k=quantity)
-            result_material = random.choices(material,material_rarity, k=quantity)
-            items = random.choices(tresure_dict["Items"], k=quantity)
-            print(format_text("\nYou found "+str(quantity)+" items!","main"))
-            print(format_text("\n"+"="*75,"dark")) 
-            random_items = []
-            for i in range(quantity):
-                random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-            print(tabulate([i.to_dict() for i in random_items], headers=[]))
-            print(format_text("="*75,"dark")) 
-            print('Total value of items:'+" "*48+ format_text(str(sum(item.value for item in random_items)) + 'g',"light"))
+            print(generate_treasures(colors=True))
             input()
             os.system("cls || clear")
             

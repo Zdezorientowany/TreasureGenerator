@@ -1,6 +1,6 @@
 import discord
 import asyncio
-from main import generate_treasures_for_discord
+from main import generate_treasures
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
@@ -9,7 +9,7 @@ client = discord.Client(intents=intents)
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     channel = client.get_channel(1092570289843490897)
-    await channel.send("```"+ generate_treasures_for_discord() + "```")
+    await channel.send("```"+ generate_treasures(colors=False) + "```")
     await client.close()
 
 async def main():
