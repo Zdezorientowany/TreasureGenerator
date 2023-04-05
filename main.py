@@ -187,71 +187,178 @@ while True:
                     print(format_text("Invalid choice. ","false"))
                     continue
 
-    elif choice in ("4", "O", "Options"):
-        print(format_text("="*75,"main")) 
-        print(format_text("-"*33,"dark"),format_text("Options","light"),format_text("-"*33,"dark"))
-        print("Minimum items generated:",format_text(str(MIN),"light"))
-        print("Maximum items generated:",format_text(str(MAX),"light"))
-        print(format_text("-"*28,"dark"),format_text("Rarity of quality","light"),format_text("-"*28,"dark"))
-        for x, y in zip(quality, quality_rarity):
-            print(x+format_text(": {:.0%}".format(y),"light"))
-        print(format_text("-"*28,"dark"),format_text("Rarity of material","light"),format_text("-"*27,"dark"))    
-        for x, y in zip(material, material_rarity):
-            print(x+format_text(": {:.0%}".format(y),"light"))
-        print(format_text("-"*75,"dark")) 
-        print(format_text("="*75,"main")) 
-        print(format_text("Min(1) - Max(2) - Quality(3) - Material(4) - Exit(5)","main"))
-        option = input(format_text("What parameter do you want to modify?: ","light"))
-        if option in("Min", "1"):
-            try:
-                MAX = int(input(f"Enter new value for MIN({MIN}): "))
-                settings_dict["MIN"] = MIN
-                with open('settings.json', 'w') as f:
-                    json.dump(settings_dict, f, indent=4)
-            except ValueError:
-                os.system("cls || clear")
-                print(format_text("Invalid choice. Returning to menu ","false"))
-        elif option in("Max", "2"):
-            try:
-                MAX = int(input(f"Enter new value for MAX({MAX}): "))
-                settings_dict["MAX"] = MAX
-                with open('settings.json', 'w') as f:
-                    json.dump(settings_dict, f, indent=4)
-            except ValueError:
-                os.system("cls || clear")
-                print(format_text("Invalid choice. Returning to menu ","false"))
-        elif option in ("Quality", "Q", "3"):
-            try:
-                quality_choice = input(f"Enter a quality value ({', '.join([f'{q} ({r})' for q, r in zip(quality, quality_rarity)])}): ")
-                quality_index = quality.index(quality_choice)
-                new_quality_rarity = input(f"Enter a new rarity value for {quality_choice} ({quality_rarity[quality_index]}):")
-                quality_rarity[quality_index] = float(new_quality_rarity)
-                settings_dict["quality"][quality_choice] = quality_rarity[quality_index]
-                with open('settings.json', 'w') as f:
-                    json.dump(settings_dict, f, indent=4)
-            except ValueError:
-                os.system("cls || clear")
-                print(format_text("Invalid choice. Returning to menu ","false"))
-        elif option in ("Material", "M", "4"):
-            try:               
-                material_choice = input(f"Enter a material value ({', '.join([f'{m} ({r})' for m, r in zip(material, material_rarity)])}): ")
-                material_index = material.index(material_choice)
-                new_material_rarity = input(f"Enter a new rarity value for {material_choice} ({material_rarity[material_index]}):")
-                material_rarity[material_index] = float(new_material_rarity)
-                settings_dict["material"][material_choice] = material_rarity[material_index]
-                with open('settings.json', 'w') as f:
-                    json.dump(settings_dict, f, indent=4)
-            except ValueError:
-                os.system("cls || clear")
-                print(format_text("Invalid input. Returning to menu ","false"))    
-        elif option in("Exit", "E", "5"):
-            print("Returning to menu...")  
-        else:
+    elif choice in ("4", "O", "Options", "o", "options"):
+        flag = True
+        while flag:
             os.system("cls || clear")
-            print(format_text("Invalid choice. Returning to menu ","false"))
-        os.system("cls || clear")
+            print(format_text("="*75,"main")) 
+            print(format_text("-"*33,"dark"),format_text("Options","light"),format_text("-"*33,"dark"))
+            print("Minimum items generated:",format_text(str(MIN),"light"))
+            print("Maximum items generated:",format_text(str(MAX),"light"))
+            print(format_text("-"*28,"dark"),format_text("Rarity of quality","light"),format_text("-"*28,"dark"))
+            for x, y in zip(quality, quality_rarity):
+                print(x+format_text(": {:.0%}".format(y),"light"))
+            print(format_text("-"*28,"dark"),format_text("Rarity of material","light"),format_text("-"*27,"dark"))    
+            for x, y in zip(material, material_rarity):
+                print(x+format_text(": {:.0%}".format(y),"light"))
+            print(format_text("-"*34,"dark"),format_text("Presets","light"),format_text("-"*33,"dark"))    
+            for i in presets_dict:
+                print(i)
+            print(format_text("-"*75,"dark")) 
+            print(format_text("="*75,"main")) 
 
-    elif choice in ("5", "e", "exit"):
+            print(format_text("Min(1) - Max(2) - Quality(3) - Material(4) - Presets(5) - Exit(6)","main"))
+            option = input(format_text("What do you want to modify?: ","light"))
+            if option in("Min", "1"):
+                try:
+                    MIN = int(input(f"Enter new value for MIN({MIN}): "))
+                    settings_dict["MIN"] = MIN
+                    with open('settings.json', 'w') as f:
+                        json.dump(settings_dict, f, indent=4)
+                except ValueError:
+                    os.system("cls || clear")
+                    print(format_text("Invalid choice. Returning to menu ","false"))
+                    break
+                continue
+            elif option in("Max", "2"):
+                try:
+                    MAX = int(input(f"Enter new value for MAX({MAX}): "))
+                    settings_dict["MAX"] = MAX
+                    with open('settings.json', 'w') as f:
+                        json.dump(settings_dict, f, indent=4)
+                except ValueError:
+                    os.system("cls || clear")
+                    print(format_text("Invalid choice. Returning to menu ","false"))
+                    break
+                continue
+            elif option in ("Quality", "Q", "3"):
+                try:
+                    quality_choice = input(f"Enter a quality value ({', '.join([f'{q} ({r})' for q, r in zip(quality, quality_rarity)])}): ")
+                    quality_index = quality.index(quality_choice)
+                    new_quality_rarity = input(f"Enter a new rarity value for {quality_choice} ({quality_rarity[quality_index]}):")
+                    quality_rarity[quality_index] = float(new_quality_rarity)
+                    settings_dict["quality"][quality_choice] = quality_rarity[quality_index]
+                    with open('settings.json', 'w') as f:
+                        json.dump(settings_dict, f, indent=4)
+                except ValueError:
+                    os.system("cls || clear")
+                    print(format_text("Invalid choice. Returning to menu ","false"))
+                    break
+                continue
+            elif option in ("Material", "M", "4"):
+                try:               
+                    material_choice = input(f"Enter a material value ({', '.join([f'{m} ({r})' for m, r in zip(material, material_rarity)])}): ")
+                    material_index = material.index(material_choice)
+                    new_material_rarity = input(f"Enter a new rarity value for {material_choice} ({material_rarity[material_index]}):")
+                    material_rarity[material_index] = float(new_material_rarity)
+                    settings_dict["material"][material_choice] = material_rarity[material_index]
+                    with open('settings.json', 'w') as f:
+                        json.dump(settings_dict, f, indent=4)
+                except ValueError:
+                    os.system("cls || clear")
+                    print(format_text("Invalid input. Returning to menu ","false"))  
+                    break
+                continue  
+            elif option in("Presets", "P", "5"):
+                choice = input(format_text("Wchich preset you want to choose?: ","light"))
+                os.system("cls || clear")
+                while True:
+                    print(format_text("\n"+"="*75,"main")) 
+                    temp = (73-len(str(choice)))/2
+                    if temp%2 > 0:
+                        temp = int(temp)+1
+                        print(format_text("-"*temp,"dark"),format_text(str(choice),"light"),format_text("-"*(temp-1),"dark"))
+                    else:
+                        temp = int(temp)
+                        print(format_text("-"*temp,"dark"),format_text(str(choice),"light"),format_text("-"*(temp),"dark"))
+                    print(format_text("-"*33,"dark"),format_text("Quantity","main"),format_text("-"*32,"dark"))
+                    print("Minimum:",presets_dict[str(choice)]["MIN"], "  Maximum:",presets_dict[str(choice)]["MAX"])
+                    print(format_text("-"*29,"dark"),format_text(" Quality Rarity ","main"),format_text("-"*28,"dark"))
+                    for a,b in zip(presets_dict[str(choice)]["quality"].keys(), presets_dict[str(choice)]["quality"].values()):
+                        print(a+": "+str(b), end='  ')
+                    print("\n"+format_text("-"*28,"dark"),format_text(" Material Rarity ","main"),format_text("-"*28,"dark"))
+                    for a,b in zip(presets_dict[str(choice)]["material"].keys(), presets_dict[str(choice)]["material"].values()):
+                        print(a+": "+str(b), end='  ')
+                    print(format_text("-"*75,"dark")) 
+                    print(format_text("="*75,"main")) 
+                    print(format_text("Min(1) - Max(2) - Quality(3) - Material(4) - Exit(5)","main"))
+                    option = input(format_text("What do you want to modify?: ","light"))
+                    if option in("Min", "1"):
+                        try:
+                            min = int(input(f"Enter new value for Minimum: "))
+                            presets_dict[str(choice)]["MIN"] = min
+                            with open('presets.json', 'w') as f:
+                                json.dump(presets_dict, f, indent=4)
+                        except ValueError:
+                            os.system("cls || clear")
+                            print(format_text("Invalid choice. Returning to options ","false"))
+                            break
+                        os.system("cls || clear")
+                        continue
+                    
+                    elif option in("Max", "2"):
+                        try:
+                            max = int(input(f"Enter new value for Maximum: "))
+                            presets_dict[str(choice)]["MAX"] = max
+                            with open('presets.json', 'w') as f:
+                                json.dump(presets_dict, f, indent=4)
+                        except ValueError:
+                            os.system("cls || clear")
+                            print(format_text("Invalid choice. Returning to options ","false"))
+                            break
+                        os.system("cls || clear")
+                        continue
+                    
+                    elif option in ("Quality", "Q", "3"):
+                        try:
+                            quality_choice = input(f"Enter a quality value ({', '.join([f'{q} ({r})' for q, r in zip(presets_dict[str(choice)]['quality'].keys(), presets_dict[str(choice)]['quality'].values())])}): ")
+                            quality_index = list(presets_dict[str(choice)]['quality'].keys()).index(quality_choice)
+                            new_quality_rarity = input(f"Enter a new rarity value for {quality_choice}:")
+                            list(presets_dict[str(choice)]['quality'].values())[quality_index] = float(new_quality_rarity)
+                            presets_dict[str(choice)]['quality'][quality_choice] = float(new_quality_rarity)
+
+                            with open('presets.json', 'w') as f:
+                                json.dump(presets_dict, f, indent=4)
+                        except ValueError:
+                            os.system("cls || clear")
+                            print(format_text("Invalid choice. Returning to menu ","false"))
+                            break
+                        os.system("cls || clear")
+                        continue
+                    elif option in ("Material", "M", "4"):
+                        try:
+                            material_choice = input(f"Enter a quality value ({', '.join([f'{q} ({r})' for q, r in zip(presets_dict[str(choice)]['material'].keys(), presets_dict[str(choice)]['material'].values())])}): ")
+                            material_index = list(presets_dict[str(choice)]['material'].keys()).index(material_choice)
+                            new_material_rarity = input(f"Enter a new rarity value for {material_choice}:")
+                            list(presets_dict[str(choice)]['material'].values())[material_index] = float(new_material_rarity)
+                            print(presets_dict[str(choice)]['material'][material_choice],"Przypisz",list(presets_dict[str(choice)]["material"].values())[material_index])
+                            presets_dict[str(choice)]['material'][material_choice] = float(new_material_rarity)
+
+                            with open('presets.json', 'w') as f:
+                                json.dump(presets_dict, f, indent=4)
+                        except ValueError:
+                            os.system("cls || clear")
+                            print(format_text("Invalid choice. Returning to menu ","false"))
+                            break
+                        os.system("cls || clear")
+                        continue
+                    elif option in("Exit", "E", "6"):
+                        os.system("cls || clear")
+                        print("Returning to menu...") 
+                        break 
+
+                    break
+                continue 
+            elif option in("Exit", "E", "6"):
+                print("Returning to menu...") 
+                os.system("cls || clear")
+                break 
+            else:
+                os.system("cls || clear")
+                print(format_text("Invalid choice. Returning to menu ","false"))
+                break
+
+    elif choice in ("5", "E", "Exit", "e", "exit"):
         print(format_text("Exiting...","light")) 
         break 
     else:

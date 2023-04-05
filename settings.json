@@ -1,6 +1,6 @@
 {
     "quality": {
-        "Broken": 0.5,
+        "Broken": 0.9,
         "Rusted": 0.4,
         "Polished": 0.1,
         "Flawless": 0.05,
@@ -13,5 +13,5 @@
         "Jeweled": 0.01
     },
     "MIN": 0,
-    "MAX": 5
+    "MAX": 10
 }
