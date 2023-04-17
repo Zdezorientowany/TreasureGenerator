@@ -1,7 +1,10 @@
 import discord
 import asyncio
-from main import generate_treasures
+import sys
 import configparser
+from utils import colors, format_text
+
+result = sys.argv[1]
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -14,14 +17,14 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    # print('We have logged in as {0.user}'.format(client))
     channel = client.get_channel(int(channel_id))
-    await channel.send("```"+ generate_treasures(colors=False) + "```")
+    await channel.send("```"+ result + "```")
     await client.close()
 
 async def main():
     await client.start(str(api_key))
-    print("Finished")
+    print(format_text("Sent!","light"))
 
-print("\033[93m=======Sending the output to DISCORD=======\033[0m")
+print(format_text("Sending the output to DISCORD","light"))
 asyncio.run(main())

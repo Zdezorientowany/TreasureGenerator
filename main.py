@@ -25,26 +25,23 @@ quality_rarity = list(settings_dict["quality"].values())
 material = list(settings_dict["material"].keys())
 material_rarity = list(settings_dict["material"].values())
 
-def generate_treasures(colors=True):
-    quantity = random.randint(MIN, MAX)
-    result_quality = random.choices(quality,quality_rarity, k=quantity)
-    result_material = random.choices(material,material_rarity, k=quantity)
-    items = random.choices(tresure_dict["Items"], k=quantity)
-    random_items = []
-    for i in range(quantity):
-        random_items.append(Treasure(items[i]["name"], items[i]["value"], items[i]["size"], result_material[i], result_quality[i]))
-    if colors:
-        table = tabulate([i.to_dict() for i in random_items], headers=[])
-
+def generate_result_string(header, quantity, items):  
+    table = tabulate([i.to_dict_for_discord() for i in items], headers=[]) 
+    temp = (55-len(str(header)))
+    if temp%2 > 0:
+        temp = int(temp/2)+1
+        header = str(("="*temp)+" "+header+" "+("="*(temp-1)))
     else:
-        table = tabulate([i.to_dict_for_discord() for i in random_items], headers=[])
+        temp = int(temp/2)
+        header = str(("="*temp)+" "+header+" "+("="*(temp)))
     
-    return str("="*22 + "TREASURE!" + "="*21 + "\n\n" 
+    
+    return str(header+"\n\n"
                + "You found "+str(quantity)+" items!" + "\n\n" 
-               + "="*52 + "\n" 
+               + "="*57 + "\n" 
                + table + "\n" 
-               + "="*52 + "\n" 
-               + "Total value of items:" + " "*28 + str(sum(item.value for item in random_items)) + 'g')
+               + "="*57 + "\n" 
+               + "Total value of items:" + " "*32 + str(sum(item.value for item in items)) + 'g')
 
 if __name__ == "__main__":
     os.system("cls || clear")
@@ -53,10 +50,9 @@ if __name__ == "__main__":
         print(format_text("-"*28,"dark"),format_text("Treasure Generator","light"),format_text("-"*27,"dark"))
         print("1. ",format_text("Advanced Generate","light"))#Advanced Generator with promtps
         print("2. ",format_text("Quick Generate","light"))#Generate random treasures by one click
-        print("3. ",format_text("Quick Generate to Discord","light"))#Generate treasures by one click and send output to Discrod channel
-        print("4. ",format_text("Preset Generate","light"))#Generate treasures from preconfigured settings
-        print("5. ",format_text("Options","light"))#You can change crucial variables needed for quick Generate
-        print("6. ",format_text("Exit","light"))#Close program
+        print("3. ",format_text("Preset Generate","light"))#Generate treasures from preconfigured settings
+        print("4. ",format_text("Options","light"))#You can change crucial variables needed for quick Generate
+        print("5. ",format_text("Exit","light"))#Close program
         print(format_text("-"*75,"dark")) 
         print(format_text("="*75,"main"))  
         choice = input("Enter your choice: ")
@@ -119,18 +115,19 @@ if __name__ == "__main__":
                     print('Total value of items:'+" "*48+ format_text(str(sum(item.value for item in random_items)) + 'g',"light"))
                     print(format_text("\n"+"-"*75,"dark")) 
                     print(format_text("="*75,"main")) 
-                    print("1 - Roll again | 2 - Reroll treasures |  3 - Reset | 4 - Back to menu")
-                    option = input("")
+                    option = input("1 - Roll again | 2 - Reroll treasures |  3 - Reset | 4 - Print to DISCORD | 5 - Back to menu : ")
                     if option in ("1"):
                         os.system("cls || clear")
                         quantity = random.randint(int(min), int(max))
-                        continue
                     elif option in("2"):
                         os.system("cls || clear")
-                        continue
                     elif option in("3"):
                         os.system("cls || clear")
                         break
+                    elif option in ("4"):
+                        subprocess.run(['python', 'bot.py', generate_result_string("Advanced Generating",quantity,random_items)])
+                        input()
+                        os.system("cls || clear")  
                     elif option in("4"):
                         os.system("cls || clear")
                         flag = False
@@ -138,7 +135,6 @@ if __name__ == "__main__":
                     else:
                         os.system("cls || clear")
                         print(format_text("Invalid choice. ","false"))
-                        continue
 
         elif choice in ("2", "Q", "Quick", "Quick Generate"):
             print(format_text("\n"+"="*75,"main")) 
@@ -158,14 +154,15 @@ if __name__ == "__main__":
             print('Total value of items:'+" "*48+ format_text(str(sum(item.value for item in random_items)) + 'g',"light"))
             print(format_text("\n"+"-"*75,"dark")) 
             print(format_text("="*75,"main")) 
-            input()
-            os.system("cls || clear")
-
-        elif choice == "3" or choice == "D" or choice =="Discord" or choice == "Quick Generate to DISCORD":
-                result = subprocess.run(['python', 'bot.py'])
+            option = input("1 - Print on Discord | 2 - Back to menu : ")
+            if option in ("1"):
+                subprocess.run(['python', 'bot.py', generate_result_string("Quick Generate",quantity,random_items)])
+                input()
+                os.system("cls || clear")        
+            elif option in("2"):          
                 os.system("cls || clear")
-
-        elif choice in ("4", "P", "Preset", "Preset Generate", "Pre"):
+        
+        elif choice in ("3", "P", "Preset", "Preset Generate", "Pre"):
             flag = True
             while flag:
                 print(format_text("\n"+"="*75,"main")) 
@@ -176,18 +173,19 @@ if __name__ == "__main__":
                 print(format_text("\n"+"-"*75,"dark")) 
                 print(format_text("="*75,"main")) 
                 choice = input("Which preset you want to use?: ")
-                os.system("cls || clear")
-                print(format_text("\n"+"="*75,"main")) 
                 temp = (73-len(str(choice)))/2
                 if temp%2 > 0:
                     temp = int(temp)+1
-                    print(format_text("-"*temp,"dark"),format_text(str(choice),"light"),format_text("-"*(temp-1),"dark"))
+                    header = format_text("-"*temp,"dark")+" "+format_text(str(choice),"light")+" "+format_text("-"*(temp-1),"dark")
                 else:
                     temp = int(temp)
-                    print(format_text("-"*temp,"dark"),format_text(str(choice),"light"),format_text("-"*(temp),"dark"))
+                    header = format_text("-"*temp,"dark")+" "+format_text(str(choice),"light")+" "+format_text("-"*(temp),"dark")
                 chosen_preset = presets_dict[str(choice)]
                 quantity = random.randint(chosen_preset["MIN"], chosen_preset["MAX"])
                 while True: 
+                    os.system("cls || clear")
+                    print(format_text("\n"+"="*75,"main")) 
+                    print(header)
                     result_quality = random.choices(list(chosen_preset["quality"].keys()),list(chosen_preset["quality"].values()), k=quantity)
                     result_material = random.choices(list(chosen_preset["material"].keys()),list(chosen_preset["material"].values()), k=quantity)
                     items = random.choices(tresure_dict["Items"], k=quantity)
@@ -201,8 +199,7 @@ if __name__ == "__main__":
                     print('Total value of items:'+" "*48+ format_text(str(sum(item.value for item in random_items)) + 'g',"light"))
                     print(format_text("\n"+"-"*75,"dark")) 
                     print(format_text("="*75,"main"))              
-                    print("1 - Roll again | 2 - Reroll treasures |  3 - Reset | 4 - Back to menu")
-                    option = input("")
+                    option = input("1 - Roll again | 2 - Reroll treasures |  3 - Reset | 4 - Print on DISCORD | 5 - Back to menu : ")
                     if option in ("1"):
                         os.system("cls || clear")
                         quantity = random.randint(chosen_preset["MIN"], chosen_preset["MAX"])
@@ -213,7 +210,11 @@ if __name__ == "__main__":
                     elif option in("3"):
                         os.system("cls || clear")
                         break
-                    elif option in("4"):
+                    elif option in ("4"):
+                        subprocess.run(['python', 'bot.py', generate_result_string(choice,quantity,random_items)])
+                        input()
+                        os.system("cls || clear")  
+                    elif option in("5"):
                         os.system("cls || clear")
                         flag = False
                         break
@@ -222,7 +223,7 @@ if __name__ == "__main__":
                         print(format_text("Invalid choice. ","false"))
                         continue
 
-        elif choice in ("5", "O", "Options"):
+        elif choice in ("4", "O", "Options"):
             flag = True
             while flag:
                 os.system("cls || clear")
@@ -393,6 +394,6 @@ if __name__ == "__main__":
                     print(format_text("Invalid choice. Returning to menu ","false"))
                     break
 
-        elif choice in ("6", "E", "Exit"):
+        elif choice in ("5", "E", "Exit"):
             print(format_text("Exiting...","light")) 
             break 
