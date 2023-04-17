@@ -12,6 +12,14 @@ To use this code, you need to have Python 3 installed on your system. You also n
 pip install -r requirements.txt
 ```
 
+To use the Discord output function, you need to create a `config.ini` file and fill it with the appropriate values for your Discord bot and channel. The following code should be included in the `config.ini` file:
+
+```
+[CONFIG]
+API_KEY = #BOT API 
+KEYCHANNEL_ID = #CHANNEL ID
+```
+
 ### Usage
 
 To generate treasures, run the following command:
